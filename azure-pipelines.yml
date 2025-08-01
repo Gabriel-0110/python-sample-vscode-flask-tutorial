@@ -16,17 +16,23 @@ strategy:
       pythonPath: 'C:\Users\Gabriel\AppData\Local\Programs\Python\Python311\python.exe'
 
 steps:
-- script: |
-    echo Using Python: "$(pythonPath)"
-    "$(pythonPath)" --version
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Using Python: "$(pythonPath)"
+      "$(pythonPath)" --version
   displayName: 'Verify Python version'
 
-- script: |
-    "$(pythonPath)" -m pip install --upgrade pip
-    "$(pythonPath)" -m pip install -r requirements.txt
+- task: CmdLine@2
+  inputs:
+    script: |
+      "$(pythonPath)" -m pip install --upgrade pip
+      "$(pythonPath)" -m pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: |
-    "$(pythonPath)" -m pip install pytest
-    "$(pythonPath)" -m pytest
+- task: CmdLine@2
+  inputs:
+    script: |
+      "$(pythonPath)" -m pip install pytest
+      "$(pythonPath)" -m pytest
   displayName: 'Run tests'
