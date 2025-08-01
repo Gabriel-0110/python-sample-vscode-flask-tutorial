@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: Default  # Make sure this matches your agent pool
+  name: Default
 
 strategy:
   matrix:
@@ -16,17 +16,23 @@ strategy:
       pythonPath: $(HOME)/python311/bin/python3
 
 steps:
-- script: |
-    echo "Using Python at: $(pythonPath)"
-    $(pythonPath) --version
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo "Using Python at: $(pythonPath)"
+      $(pythonPath) --version
   displayName: 'Verify Python version'
 
-- script: |
-    $(pythonPath) -m pip install --upgrade pip
-    $(pythonPath) -m pip install -r requirements.txt
+- task: CmdLine@2
+  inputs:
+    script: |
+      $(pythonPath) -m pip install --upgrade pip
+      $(pythonPath) -m pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: |
-    $(pythonPath) -m pip install pytest
-    $(pythonPath) -m pytest
+- task: CmdLine@2
+  inputs:
+    script: |
+      $(pythonPath) -m pip install pytest
+      $(pythonPath) -m pytest
   displayName: 'Run tests'
