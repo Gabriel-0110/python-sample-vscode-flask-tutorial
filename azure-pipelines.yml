@@ -17,11 +17,16 @@ strategy:
 
 steps:
 - script: |
-    $(pythonPath) -m pip install --upgrade pip
-    $(pythonPath) -m pip install -r requirements.txt
+    echo Using Python: "$(pythonPath)"
+    "$(pythonPath)" --version
+  displayName: 'Verify Python version'
+
+- script: |
+    "$(pythonPath)" -m pip install --upgrade pip
+    "$(pythonPath)" -m pip install -r requirements.txt
   displayName: 'Install dependencies'
 
 - script: |
-    $(pythonPath) -m pip install pytest
-    $(pythonPath) -m pytest
+    "$(pythonPath)" -m pip install pytest
+    "$(pythonPath)" -m pytest
   displayName: 'Run tests'
