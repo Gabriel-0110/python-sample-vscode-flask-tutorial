@@ -15,13 +15,13 @@ jobs:
   strategy:
     matrix:
       Python38:
-        pythonPath: /home/gabriel_chiappa/python/3.8/bin/python3
+        pythonPath: /usr/local/bin/python3.8
       Python39:
-        pythonPath: /home/gabriel_chiappa/python/3.9/bin/python3
+        pythonPath: /usr/local/bin/python3.9
       Python310:
-        pythonPath: /home/gabriel_chiappa/python/3.10/bin/python3
+        pythonPath: /usr/local/bin/python3.10
       Python311:
-        pythonPath: /home/gabriel_chiappa/python/3.11/bin/python3
+        pythonPath: /usr/local/bin/python3.11
 
   steps:
   - checkout: self
