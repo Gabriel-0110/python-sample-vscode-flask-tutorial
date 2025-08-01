@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: Default
+  name: Default  # your self-hosted agent pool
 
 strategy:
   matrix:
@@ -21,6 +21,7 @@ steps:
     script: |
       echo Using Python: "$(pythonPath)"
       "$(pythonPath)" --version
+    workingDirectory: '$(Build.SourcesDirectory)'
   displayName: 'Verify Python version'
 
 - task: CmdLine@2
@@ -28,6 +29,7 @@ steps:
     script: |
       "$(pythonPath)" -m pip install --upgrade pip
       "$(pythonPath)" -m pip install -r requirements.txt
+    workingDirectory: '$(Build.SourcesDirectory)'
   displayName: 'Install dependencies'
 
 - task: CmdLine@2
@@ -35,4 +37,5 @@ steps:
     script: |
       "$(pythonPath)" -m pip install pytest
       "$(pythonPath)" -m pytest
+    workingDirectory: '$(Build.SourcesDirectory)'
   displayName: 'Run tests'
