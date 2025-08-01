@@ -7,13 +7,13 @@ pool:
 strategy:
   matrix:
     Python38:
-      pythonPath: 'C:\Python38\python.exe'
+      pythonPath: 'C:\Users\Gabriel\AppData\Local\Programs\Python\Python38\python.exe'
     Python39:
-      pythonPath: 'C:\Python39\python.exe'
+      pythonPath: 'C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python39_64\python.exe'
     Python310:
-      pythonPath: 'C:\Python310\python.exe'
+      pythonPath: 'C:\Users\Gabriel\AppData\Local\Programs\Python\Python310\python.exe'
     Python311:
-      pythonPath: 'C:\Python311\python.exe'
+      pythonPath: 'C:\Users\Gabriel\AppData\Local\Programs\Python\Python311\python.exe'
 
 steps:
 - script: |
