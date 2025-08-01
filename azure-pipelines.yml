@@ -2,40 +2,31 @@ trigger:
 - main
 
 pool:
-  name: Default  # your self-hosted agent pool
+  name: Default  # Make sure this matches your agent pool
 
 strategy:
   matrix:
     Python38:
-      pythonPath: 'C:\Users\Gabriel\AppData\Local\Programs\Python\Python38\python.exe'
+      pythonPath: $(HOME)/python38/bin/python3
     Python39:
-      pythonPath: 'C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python39_64\python.exe'
+      pythonPath: $(HOME)/python39/bin/python3
     Python310:
-      pythonPath: 'C:\Users\Gabriel\AppData\Local\Programs\Python\Python310\python.exe'
+      pythonPath: $(HOME)/python310/bin/python3
     Python311:
-      pythonPath: 'C:\Users\Gabriel\AppData\Local\Programs\Python\Python311\python.exe'
+      pythonPath: $(HOME)/python311/bin/python3
 
 steps:
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo Using Python: "$(pythonPath)"
-      "$(pythonPath)" --version
-    workingDirectory: '$(Build.SourcesDirectory)'
+- script: |
+    echo "Using Python at: $(pythonPath)"
+    $(pythonPath) --version
   displayName: 'Verify Python version'
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      "$(pythonPath)" -m pip install --upgrade pip
-      "$(pythonPath)" -m pip install -r requirements.txt
-    workingDirectory: '$(Build.SourcesDirectory)'
+- script: |
+    $(pythonPath) -m pip install --upgrade pip
+    $(pythonPath) -m pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      "$(pythonPath)" -m pip install pytest
-      "$(pythonPath)" -m pytest
-    workingDirectory: '$(Build.SourcesDirectory)'
+- script: |
+    $(pythonPath) -m pip install pytest
+    $(pythonPath) -m pytest
   displayName: 'Run tests'
